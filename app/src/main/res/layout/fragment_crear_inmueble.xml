@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/crearInmueble"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.inmueble.CrearInmuebleFragment">
+
+    <!-- ImageView for Inmueble image -->
+
+    <!-- Dirección -->
+    <ImageView
+        android:id="@+id/inmuebleImage"
+        android:layout_width="0dp"
+        android:layout_height="170dp"
+        android:contentDescription="Inmueble image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tucasa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Direccion"
+        android:paddingTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inmuebleImage" />
+
+    <!-- Uso -->
+    <EditText
+        android:id="@+id/etUso"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Uso: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDireccion" />
+
+    <!-- Ambientes -->
+    <EditText
+        android:id="@+id/etAmbientes"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Ambientes:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etUso" />
+
+    <!-- Patio -->
+    <EditText
+        android:id="@+id/etBano"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Baño: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etAmbientes" />
+
+    <!-- Condición -->
+    <EditText
+        android:id="@+id/etCondicion"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Condición: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etBano" />
+
+    <!-- Descripción -->
+    <EditText
+        android:id="@+id/etDescripcion"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Descripción: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCondicion" />
+
+    <!-- Servicios -->
+    <EditText
+        android:id="@+id/etServicios"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Servicios: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDescripcion" />
+
+    <!-- Precio -->
+    <EditText
+        android:id="@+id/etPrecio"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Precio: "
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etServicios" />
+
+    <!-- Superficie -->
+    <EditText
+        android:id="@+id/etSuperficie"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Superficie: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPrecio" />
+
+    <!-- Tipo Inmueble -->
+    <Spinner
+        android:id="@+id/spinTipoInmueble"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Tipo Inmueble: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSuperficie" />
+
+    <!-- CheckBox para Baños -->
+    <CheckBox
+        android:id="@+id/chekPatio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinTipoInmueble" />
+
+    <!-- CheckBox para Cochera -->
+    <CheckBox
+        android:id="@+id/checkCochera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cochera"
+        app:layout_constraintTop_toBottomOf="@id/spinTipoInmueble"
+        app:layout_constraintStart_toEndOf="@id/chekPatio"
+        app:layout_constraintBaseline_toBaselineOf="@id/chekPatio" />
+
+    <!-- CheckBox para Estado -->
+    <CheckBox
+        android:id="@+id/checkEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado"
+        app:layout_constraintTop_toBottomOf="@id/spinTipoInmueble"
+        app:layout_constraintStart_toEndOf="@id/checkCochera"
+        app:layout_constraintBaseline_toBaselineOf="@id/checkCochera"/>
+
+    <Button
+        android:id="@+id/btCreainmueble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Crear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btCargarImagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IMG"
+        app:layout_constraintBottom_toBottomOf="@+id/inmuebleImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
