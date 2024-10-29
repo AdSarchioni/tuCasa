@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detalleContrato"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.contrato.DetalleContratoFragment">
+    <!-- ID del Contrato -->
+
+    <!-- ID del Inmueble -->
+    <EditText
+        android:id="@+id/editTextIdContrato"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:hint="ID Contrato"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextIdInmueble"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="ID Inmueble"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextIdContrato" />
+
+    <!-- ID del Inquilino -->
+    <EditText
+        android:id="@+id/editTextIdInquilino"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="ID Inquilino"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextIdInmueble" />
+
+    <!-- Fecha de Inicio -->
+    <EditText
+        android:id="@+id/editTextFechaInicio"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Fecha de Inicio"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextIdInquilino" />
+
+    <!-- Fecha de Finalización -->
+    <EditText
+        android:id="@+id/editTextFechaFinalizacion"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Fecha Finalización"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextFechaInicio" />
+
+    <!-- Monto -->
+    <EditText
+        android:id="@+id/editTextMonto"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Monto"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextFechaFinalizacion" />
+
+    <!-- Meses Pagos -->
+    <EditText
+        android:id="@+id/ediTextPropietarios"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Propietario"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextMonto" />
+
+    <!-- Estado del Contrato -->
+    <EditText
+        android:id="@+id/ediTextMesesAlquilados"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Meses de Alquiler"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ediTextPropietarios" />
+
+    <!-- Información del Inmueble -->
+    <TextView
+        android:id="@+id/textViewInmueble"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Información del Inmueble"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ediTextMesesAlquilados" />
+
+    <!-- Información del Tipo de Inmueble -->
+    <TextView
+        android:id="@+id/textViewTipoInmueble"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewInmueble" />
+
+    <!-- Información del Inquilino -->
+    <TextView
+        android:id="@+id/textViewInquilino"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Información del Inquilino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTipoInmueble" />
+
+    <!-- Información del Pago -->
+    <TextView
+        android:id="@+id/textViewPago"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewInquilino" />
+
+    <!-- Información del Usuario -->
+    <TextView
+        android:id="@+id/textViewUsuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPago" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="CONTRATO"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btPagos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text=" Pagos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

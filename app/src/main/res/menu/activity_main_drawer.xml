@@ -17,5 +17,9 @@
             android:id="@+id/nav_inquilino"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_inquilino" />
+        <item
+            android:id="@+id/nav_contrato"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_contrato" />
     </group>
 </menu>

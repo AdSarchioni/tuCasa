@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.movi.tucasalab3.models.CambioC;
+import com.movi.tucasalab3.models.Contrato;
 import com.movi.tucasalab3.models.Inmueble;
 import com.movi.tucasalab3.models.Inquilino;
 import com.movi.tucasalab3.models.LoginUs;
+import com.movi.tucasalab3.models.Pago;
 import com.movi.tucasalab3.models.Propietario;
 
 
@@ -115,10 +117,16 @@ public class ApiClient {
         Call<List<Inmueble>> ObtenerInmueblesAlquilados(@Header("Authorization") String token);
 
         /*-------------Inquilino------------------*/
-
         @GET("inquilinos/obtenerInquilinoPorInmueble")
         Call<Inquilino> ObtenerInquilinoPorInmueble(@Header("Authorization") String token, @Query("id") int id);
 
+        /*-------------Contrato------------------*/
+        @GET("contrato/obtenerContratoPorInmueble")
+        Call<Contrato> ObtenerContratoPorInmueble(@Header("Authorization") String token, @Query("id") int id);
+
+        /*-------------Pago------------------*/
+        @GET("Pago/ObtenerPagosPorContrato")
+        Call<List<Pago>> ObtenerPagosPorContrato(@Header("Authorization") String token, @Query("idContrato") int idContrato);
 
 
     }

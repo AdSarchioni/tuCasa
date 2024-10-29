@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.movi.tucasalab3.R;
 import com.movi.tucasalab3.models.Inmueble;
-import com.movi.tucasalab3.ui.inmueble.InmuebleAdapter;
 
 import java.util.List;
 
@@ -80,9 +79,9 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.Inqu
 
         public InquilinoViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvDireccionInmuInqui = itemView.findViewById(R.id.tvDireccionInmuInqui);
-            tvInfoInmuInqui = itemView.findViewById(R.id.tvInfoInmuInqui);
-            ivInmuebleInquilino = itemView.findViewById(R.id.ivInmuebleInquilino);
+            tvDireccionInmuInqui = itemView.findViewById(R.id.tvInmuebleContratoDireccion);
+            tvInfoInmuInqui = itemView.findViewById(R.id.tvInmuebleContratoInfo);
+            ivInmuebleInquilino = itemView.findViewById(R.id.ivInmuebleContrato);
 
       itemView.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -90,7 +89,7 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.Inqu
               Inmueble inmueble = listaInmuInquilino.get(getAdapterPosition());
               Bundle bundle = new Bundle();
               bundle.putSerializable("iteminmuebleInquilino", inmueble);
-              Navigation.findNavController(view).navigate(R.id.detalleInquilinoFragment, bundle);
+                      Navigation.findNavController(view).navigate(R.id.detalleInquilinoFragment, bundle);
           }
       });
 

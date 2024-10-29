@@ -88,4 +88,22 @@
             android:id="@+id/action_detalleInquilinoFragment_to_nav_inquilino"
             app:destination="@id/nav_inquilino" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_contrato"
+        android:name="com.movi.tucasalab3.ui.contrato.ContratoFragment"
+        android:label="fragment_contrato"
+        tools:layout="@layout/fragment_contrato" >
+        <action
+            android:id="@+id/action_nav_contrato_to_detalleContratoFragment"
+            app:destination="@id/detalleContratoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleContratoFragment"
+        android:name="com.movi.tucasalab3.ui.contrato.DetalleContratoFragment"
+        android:label="fragment_detalle_contrato"
+        tools:layout="@layout/fragment_detalle_contrato" >
+        <action
+            android:id="@+id/action_detalleContratoFragment_to_nav_contrato"
+            app:destination="@id/nav_contrato" />
+    </fragment>
 </navigation>
