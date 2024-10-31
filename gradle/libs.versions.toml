@@ -17,6 +17,8 @@ legacySupportV4 = "1.0.0"
 activity = "1.9.2"
 glide = "5.0.0-rc01"
 compiler = "5.0.0-rc01"
+playServicesMaps = "19.0.0"
+playServicesLocation = "21.3.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,6 +38,8 @@ legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", ver
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "compiler" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

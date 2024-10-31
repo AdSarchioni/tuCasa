@@ -1,5 +1,8 @@
 package com.movi.tucasalab3;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         getPermisos();
+        solicitarPermisos();
 
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                 R.id.nav_perfil,R.id.nav_inmueble,R.id.nav_inquilino, R.id.nav_contrato)
+                 R.id.nav_perfil,R.id.nav_inmueble,R.id.nav_inquilino, R.id.nav_contrato,R.id.nav_home)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -94,7 +98,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    private void solicitarPermisos(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && (checkSelfPermission(ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) ||
+                (checkSelfPermission(ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            requestPermissions(new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION}, 1000);
+        }
+    }
 
 
 }

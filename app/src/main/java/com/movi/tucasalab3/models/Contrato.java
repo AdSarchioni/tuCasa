@@ -1,8 +1,9 @@
 package com.movi.tucasalab3.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Contrato {
+public class Contrato implements Serializable {
     private int id_Contrato;
     private int id_Inmueble;
     private int id_Inquilino;

@@ -25,6 +25,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -55,8 +57,8 @@ public class ApiClient {
         return shared.getString("token", "");
     }
 
-    public static final String URLBASE = "http://192.168.0.18:5028/api/";
-    public static final String URLBASEIMG = "http://192.168.0.18:5028/img/";
+    public static final String URLBASE = "http://192.168.1.100:5028/api/";
+    public static final String URLBASEIMG = "http://192.168.1.100:5028/img/";
     public static InmobiliariaService getApiInmobiliaria(Context context){
 
 
@@ -126,9 +128,15 @@ public class ApiClient {
 
         /*-------------Pago------------------*/
         @GET("Pago/ObtenerPagosPorContrato")
-        Call<List<Pago>> ObtenerPagosPorContrato(@Header("Authorization") String token, @Query("idContrato") int idContrato);
+        Call<List<Pago>> ObtenerPagosPorContrato(@Header("Authorization") String token, @Query("id") int id);
+
+        @FormUrlEncoded
+        @POST("propietarios/email")
+        Call<String> olvidoContrasena(@Field("email") String email);
 
 
+        @GET("propietarios/token")
+        Call<String> resetContrasena(@Header("Authorization") String token);
     }
 
 

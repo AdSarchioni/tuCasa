@@ -65,7 +65,15 @@ public class DetalleContratoFragment extends Fragment {
             }
 
         });
-mViewModel.CargarItem(getArguments());
+        binding.btPagos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mViewModel.verPagos(view);
+            }
+        });
+
+
+        mViewModel.CargarItem(getArguments());
 
         return root;
 

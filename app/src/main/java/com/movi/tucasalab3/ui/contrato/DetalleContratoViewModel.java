@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,6 +14,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
+import com.movi.tucasalab3.R;
 import com.movi.tucasalab3.models.Contrato;
 import com.movi.tucasalab3.models.Inmueble;
 import com.movi.tucasalab3.retrofit.ApiClient;
@@ -60,8 +62,8 @@ public class DetalleContratoViewModel extends AndroidViewModel {
                     itemM.postValue(response.body());
 
                 }else {
-
-                    Log.d("salida respuesta ",response.body().toString());
+                    Toast.makeText(context, "No hay Pagos", Toast.LENGTH_SHORT).show();
+                   // Log.d("salida respuesta ",response.body().toString());
                 }
             }
 
@@ -72,7 +74,19 @@ public class DetalleContratoViewModel extends AndroidViewModel {
         });
 
     }
+    public void verPagos(View view) {
 
+        Bundle bundle = new Bundle();
+
+        Contrato contrato = itemM.getValue();
+
+        bundle.putSerializable("contratoPago", contrato);
+
+
+        Navigation.findNavController(view).
+                navigate(R.id.pagosFragment,bundle);
+
+    }
 
 
 

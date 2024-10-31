@@ -8,7 +8,7 @@ public class Pago {
     private double importe;
     private int cuotaPaga;
     private int mesesPagos;
-    private Date fecha;
+    private String fecha;
     private double multa;
     private int id_Creado_Por;
     private int id_Terminado_Por;
@@ -16,7 +16,7 @@ public class Pago {
     private Inquilino inquilino;
     private Contrato contrato;
 
-    public Pago(int id_Pago, int id_Contrato, double importe, int cuotaPaga, int mesesPagos, Date fecha, double multa, int id_Creado_Por, int id_Terminado_Por, int estado_Pago, Inquilino inquilino, Contrato contrato) {
+    public Pago(int id_Pago, int id_Contrato, double importe, int cuotaPaga, int mesesPagos, String fecha, double multa, int id_Creado_Por, int id_Terminado_Por, int estado_Pago, Inquilino inquilino, Contrato contrato) {
         this.id_Pago = id_Pago;
         this.id_Contrato = id_Contrato;
         this.importe = importe;
@@ -71,11 +71,11 @@ public class Pago {
         this.mesesPagos = mesesPagos;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

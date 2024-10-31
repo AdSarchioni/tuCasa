@@ -106,4 +106,14 @@
             android:id="@+id/action_detalleContratoFragment_to_nav_contrato"
             app:destination="@id/nav_contrato" />
     </fragment>
+    <fragment
+        android:id="@+id/pagosFragment"
+        android:name="com.movi.tucasalab3.ui.pago.PagosFragment"
+        android:label="fragment_pagos"
+        tools:layout="@layout/fragment_pagos" >
+        <action
+            android:id="@+id/action_pagosFragment_to_nav_contrato"
+            app:destination="@id/nav_contrato" />
+    </fragment>
+    <fragment android:id="@+id/placeholder" />
 </navigation>
