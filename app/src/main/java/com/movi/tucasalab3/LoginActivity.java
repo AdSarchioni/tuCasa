@@ -58,46 +58,57 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
             public void onClick(View view) {
                 String correo = binding.etUsuario.getText().toString();
                 if (!correo.isEmpty()) {
-                    vm.mostrarDialogoOlvidoContrasena(correo);
+                    vm.olvidoContrasena(correo);
                 } else {
                     Toast.makeText(LoginActivity.this, "Por favor, ingrese su correo", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        //controlo que el usuaio sea correcto y le pregunto si realmente quiere seretear
+
+
+        
+
+
+      //  controlo que el usuario sea correcto y le pregunto si realmente quiere seretear
         vm.getTokenValid().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isValid) {
-                if (isValid) {
-                    // Si el token es válido, sigue como está
-                    new AlertDialog.Builder(LoginActivity.this)
-                            .setTitle("Confirmación")
-                            .setMessage("¿Está seguro de que desea resetear su contraseña?")
-                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    vm.resetContrasena();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .show();
-                } else {
-                    // si el token es false muestra un mensaje de error
-                    new AlertDialog.Builder(LoginActivity.this)
-                            .setTitle("Error")
-                            .setMessage("El usuario ingresado es incorrecto.")
-                            .setPositiveButton("Volver", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss(); // Cierra el diálogo
-                                }
-                            })
-                            .show();
-                }
+
+                // Si el token es válido, sigue como está
+                new AlertDialog.Builder(LoginActivity.this)
+                        .setTitle("Confirmación")
+                        .setMessage("¿Está seguro de que desea resetear su contraseña?")
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                vm.resetContrasena();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
+        vm.getTokenInvalido().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                // si el token es false muestra un mensaje de error
+                new AlertDialog.Builder(LoginActivity.this)
+                        .setTitle("Error")
+                        .setMessage("El usuario ingresado es incorrecto.")
+                        .setPositiveButton("Volver", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss(); // Cierra el diálogo
+                            }
+                        })
+                        .show();
+
+
+            }
+        });
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                 && checkSelfPermission(android.Manifest.permission.CALL_PHONE)
@@ -105,15 +116,19 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
             requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
 
         }
+        // Inicializa el SensorManager para gestionar sensores del dispositivo.
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        // Obtiene el sensor de aceleración del dispositivo.
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        // Registra el listener de eventos del sensor, especificando el tipo de sensor y la frecuencia de actualización.
         senSensorManager.registerListener((SensorEventListener) this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-             vm.HacerLlamada(sensorEvent);
+        // Llama al método `HacerLlamada` del ViewModel y le pasa el evento del sensor.
+        vm.HacerLlamada(sensorEvent);
     }
 
     @Override
@@ -122,11 +137,15 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
     }
     protected void onPause(){
         super.onPause();
+        // Libera el listener del sensor cuando la actividad está en pausa para ahorrar recursos.
         senSensorManager.unregisterListener(this);
 
     }
     protected void onResume(){
         super.onResume();
+        // Registra nuevamente el listener del sensor para detectar agitación cuando la actividad está activa.
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
+
+
 }

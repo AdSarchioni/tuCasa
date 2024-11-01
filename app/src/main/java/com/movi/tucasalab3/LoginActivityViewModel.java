@@ -27,7 +27,9 @@ import retrofit2.Response;
 public class LoginActivityViewModel extends AndroidViewModel {
     private MutableLiveData<String> mUsuario;
     private Context context;
-    private MutableLiveData<Boolean> TokenValid;
+    private MutableLiveData<Boolean> tokenValido;
+    private MutableLiveData<Boolean> tokenInvalido;
+
     private String token;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
@@ -48,12 +50,19 @@ public class LoginActivityViewModel extends AndroidViewModel {
     }
     public LiveData<Boolean> getTokenValid() {
 
-        if (TokenValid == null) {
-            TokenValid = new MutableLiveData<>();
+        if (tokenValido == null) {
+            tokenValido = new MutableLiveData<>();
         }
-            return TokenValid;
-
+            return tokenValido;
     }
+    public LiveData<Boolean> getTokenInvalido() {
+        if (tokenInvalido == null) {
+            tokenInvalido = new MutableLiveData<>();
+        }
+        return tokenInvalido;
+    }
+
+
 
     public void llamarLogin(String Clave, String Usuario) {
         // Crear instancia de login con los datos ingresados
@@ -94,7 +103,7 @@ public class LoginActivityViewModel extends AndroidViewModel {
 
 
 
-    public void mostrarDialogoOlvidoContrasena(String email) {
+    public void olvidoContrasena(String email) {
         ApiClient.InmobiliariaService api=ApiClient.getApiInmobiliaria(context);
         Call<String> llamada= api.olvidoContrasena(email);
         llamada.enqueue(new Callback<String>() {
@@ -103,12 +112,10 @@ public class LoginActivityViewModel extends AndroidViewModel {
 
                 token = response.body();
                 if (token != null && !token.isEmpty()) {
-                    TokenValid.setValue(true);
-                    // Log.d("salida", "Token: " + response.code());
-                    //Log.d("salida", "Token: " + token);
+                    tokenValido.setValue(true);
+
                 } else {
-                    TokenValid.setValue(false);
-                    // Log.d("salida", "Token is null or empty");
+                    tokenInvalido.setValue(true);
                 }
             }
             @Override
@@ -121,7 +128,7 @@ public class LoginActivityViewModel extends AndroidViewModel {
     public void resetContrasena() {
         ApiClient.InmobiliariaService api = ApiClient.getApiInmobiliaria(context);
         String bearerToken = "Bearer " + token;
-        Log.d("salida", "Tokencito: " + bearerToken);
+
         Call<String> llamada = api.resetContrasena(bearerToken);
         llamada.enqueue(new Callback<String>() {
             @Override
@@ -137,34 +144,53 @@ public class LoginActivityViewModel extends AndroidViewModel {
         });
     }
 
-    public void HacerLlamada(SensorEvent sensor) {
 
-        if(sensor.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-            float x = sensor.values[0];
-            float y = sensor.values[1];
-            float z = sensor.values[2];
-            long curTime = System.currentTimeMillis();
-            if ((curTime - lastUpdate) > 100) {
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
-                float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
-                if (speed > SHAKE_THRESHOLD) {
+public void HacerLlamada(SensorEvent sensor) {
+    // Verifica que el tipo de sensor sea un acelerómetro antes de proceder.
+    if (sensor.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
-                    String TelefonoI = "2665104886";
+        // Obtiene los valores de aceleración en los ejes X, Y, y Z.
+        float x = sensor.values[0];
+        float y = sensor.values[1];
+        float z = sensor.values[2];
 
-                    Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse("tel:"+TelefonoI));
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+        // Guarda el tiempo actual en milisegundos.
+        long curTime = System.currentTimeMillis();
 
-                }
-                last_x = x;
-                last_y = y;
-                last_z = z;
+        // Comprueba si han pasado al menos 100 ms desde la última actualización
+        // para evitar ejecutar el código demasiado rápido.
+        if ((curTime - lastUpdate) > 100) {
+            long diffTime = (curTime - lastUpdate); // Calcula el tiempo transcurrido.
+            lastUpdate = curTime; // Actualiza el último tiempo de verificación.
+
+            // Calcula la velocidad de cambio de posición dividiendo la diferencia en los ejes entre el tiempo transcurrido.
+            float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+
+            // Verifica si la velocidad excede el umbral de agitación.
+            if (speed > SHAKE_THRESHOLD) {
+                // Número de teléfono a llamar cuando se detecta la agitación.
+                String TelefonoI = "2665104886";
+
+                // Crea un Intent para realizar una llamada.
+                Intent intent = new Intent(Intent.ACTION_CALL);
+
+                // Define el número de teléfono en el Intent.
+                intent.setData(Uri.parse("tel:" + TelefonoI));
+
+                // Añade una bandera para iniciar la actividad de la llamada en una nueva tarea.
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                // Inicia la llamada a través del contexto.
+                context.startActivity(intent);
             }
-        }
 
+            // Actualiza los valores anteriores de aceleración para el próximo cálculo.
+            last_x = x;
+            last_y = y;
+            last_z = z;
+        }
     }
+}
 
 
 }

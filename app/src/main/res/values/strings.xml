@@ -15,4 +15,5 @@
     <string name="menu_inquilino">Inquilino</string>
     <string name="menu_contrato">Contrato</string>
     <string name="menu_mapa">Mapa</string>
+    <string name="menu_salir">Salir</string>
 </resources>

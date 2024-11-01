@@ -1,7 +1,11 @@
 package com.movi.tucasalab3.retrofit;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,9 +60,36 @@ public class ApiClient {
         SharedPreferences shared = conectar(context);
         return shared.getString("token", "");
     }
+    public static void Salir(Activity activity){
 
-    public static final String URLBASE = "http://192.168.1.100:5028/api/";
-    public static final String URLBASEIMG = "http://192.168.1.100:5028/img/";
+        new AlertDialog.Builder(activity)
+                .setTitle("Salir de la aplicacion")
+                .setMessage("Esta seguro que quiere salir?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //   activity.finish();
+                        SharedPreferences shared = activity.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = shared.edit();
+
+                        editor.putString("token", "");
+                        editor.commit();
+                        activity.finishAndRemoveTask();
+                        activity.finishAffinity();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(activity,"Continua la aplicacion", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
+    }
+
+
+    public static final String URLBASE = "http://192.168.0.18:5028/api/";
+    public static final String URLBASEIMG = "http://192.168.0.18:5028/img/";
     public static InmobiliariaService getApiInmobiliaria(Context context){
 
 
