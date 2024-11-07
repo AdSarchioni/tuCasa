@@ -57,11 +57,9 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
             @Override
             public void onClick(View view) {
                 String correo = binding.etUsuario.getText().toString();
-                if (!correo.isEmpty()) {
+
                     vm.olvidoContrasena(correo);
-                } else {
-                    Toast.makeText(LoginActivity.this, "Por favor, ingrese su correo", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 

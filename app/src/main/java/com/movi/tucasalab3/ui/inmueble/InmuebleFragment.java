@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,7 +53,16 @@ public class InmuebleFragment extends Fragment {
 
           }
       });
+        binding.btfFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Navigation.findNavController(view).
+                        navigate(R.id.crearInmuebleFragment);
+
+
+            }
+        });
 
        mViewModel.imprimirInmuebles();
         return root;

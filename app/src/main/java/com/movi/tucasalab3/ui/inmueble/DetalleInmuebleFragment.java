@@ -45,6 +45,7 @@ public class DetalleInmuebleFragment extends Fragment {
                 binding.TVPrecioDetalle.setText(String.valueOf(inmueble.getPrecio()));
                 binding.TVUsoDetalle.setText(inmueble.getUso());
                 binding.CBDisponibleDetalle.setChecked(inmueble.getEstado_Inmueble() == 1);
+               binding.TVTipoDetalle.setText(inmueble.getServicios());
                 Glide.with(getActivity())
                         .load(ApiClient.URLBASEIMG + inmueble.getImagen())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)

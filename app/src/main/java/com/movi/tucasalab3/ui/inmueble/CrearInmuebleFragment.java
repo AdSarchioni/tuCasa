@@ -78,9 +78,8 @@ public class CrearInmuebleFragment extends Fragment {
         binding.btCargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (intent != null) {
                     arl.launch(intent);
-                }
+
             }
         });
 

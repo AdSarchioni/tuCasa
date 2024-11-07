@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -43,8 +44,7 @@ public class PagosViewModel extends AndroidViewModel {
 
 
         Contrato contrato = (Contrato) bundle.getSerializable("contratoPago");
-
-
+if (contrato!=null){
         String token = ApiClient.obtenerToken(context);
 
         ApiClient.InmobiliariaService api = ApiClient.getApiInmobiliaria(context);
@@ -53,6 +53,9 @@ public class PagosViewModel extends AndroidViewModel {
         llamada.enqueue(new Callback<List<Pago>>() {
             @Override
             public void onResponse(Call<List<Pago>> call, Response<List<Pago>> response) {
+
+
+
                 if (response.isSuccessful()) {
 
                     Log.d("salida respuesta ", response.body().toString());
@@ -64,7 +67,9 @@ public class PagosViewModel extends AndroidViewModel {
                 } else {
 
                     Log.d("salida respuesta ", response.body().toString());
+
                 }
+
             }
 
             public void onFailure(Call<List<Pago>> call, Throwable t) {
@@ -72,6 +77,13 @@ public class PagosViewModel extends AndroidViewModel {
             }
 
         });
+
+}else{
+    Toast.makeText(context, "no hay contratos para esta propiedad", Toast.LENGTH_SHORT).show();
+}
+
+
+
 
     }
 }

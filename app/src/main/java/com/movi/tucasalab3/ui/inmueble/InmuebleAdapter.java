@@ -1,9 +1,11 @@
 package com.movi.tucasalab3.ui.inmueble;
 
+import static com.movi.tucasalab3.retrofit.ApiClient.URLBASE;
 import static com.movi.tucasalab3.retrofit.ApiClient.URLBASEIMG;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,27 +52,21 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         holder.tvDireccion.setText(inmueble.getDireccion());
 
         // Muestra la información adicional del inmueble
-        holder.tvInfo.setText(inmueble.getUso() + ", "
-                + inmueble.getAmbientes() + " ambientes, "
-              //  + inmueble.getBanos() + " baños, "
-
-//                + (inmueble.getCochera() == 1 ? "Con cochera" : "Sin cochera") + ", "
-//                + (inmueble.getPatio() == 1 ? "Con patio" : "Sin patio") + ", "
+        holder.tvInfo.setText(inmueble.getAmbientes() + " ambientes, "
                 + "$" + inmueble.getPrecio() );
-           //     + inmueble.getSuperficie() + " m²")
 
-
-        // Cargar imagen (verificar que no sea nulo o vacío)
+       //  Cargar imagen (verificar que no sea nulo o vacío)
         if (inmueble.getImagen() != null && !inmueble.getImagen().isEmpty()) {
             try {
                 Glide.with(context)
                         //.load( listaInmuebles.get(position).getImagen())
                         .load(URLBASEIMG + listaInmuebles.get(position).getImagen())
+
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .fitCenter()
                         .override(210,238)
                         .into(holder.ivFotoCasa);
-
+Log.d("URL", URLBASEIMG + listaInmuebles.get(position).getImagen());
             } catch (NumberFormatException e) {
                 // Manejar el caso si la imagen no es un ID de recurso
                 Glide.with(context).load(inmueble.getImagen()).into(holder.ivFotoCasa);

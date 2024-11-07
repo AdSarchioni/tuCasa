@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.movi.tucasalab3.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Ubicacion Inmobiliaria"
         tools:layout="@layout/fragment_home" />
 
     <fragment
@@ -25,8 +25,8 @@
     <fragment
         android:id="@+id/nav_perfil"
         android:name="com.movi.tucasalab3.ui.perfil.PerfilFragment"
-        android:label="fragment_perfil"
-        tools:layout="@layout/fragment_perfil" >
+        android:label="Perfil Usuario"
+        tools:layout="@layout/fragment_perfil">
         <action
             android:id="@+id/action_nav_perfil_to_cambioCFragment"
             app:destination="@id/cambioCFragment" />
@@ -34,8 +34,8 @@
     <fragment
         android:id="@+id/cambioCFragment"
         android:name="com.movi.tucasalab3.ui.perfil.CambioCFragment"
-        android:label="fragment_cambio_c"
-        tools:layout="@layout/fragment_cambio_c" >
+        android:label="Cambio de Contraseña"
+        tools:layout="@layout/fragment_cambio_c">
         <action
             android:id="@+id/action_cambioCFragment_to_nav_perfil"
             app:destination="@id/nav_perfil" />
@@ -43,8 +43,8 @@
     <fragment
         android:id="@+id/nav_inmueble"
         android:name="com.movi.tucasalab3.ui.inmueble.InmuebleFragment"
-        android:label="fragment_inmueble"
-        tools:layout="@layout/fragment_inmueble" >
+        android:label="lista de Inmuebles"
+        tools:layout="@layout/fragment_inmueble">
         <action
             android:id="@+id/action_nav_inmueble_to_detalleInmuebleFragment"
             app:destination="@id/detalleInmuebleFragment" />
@@ -55,8 +55,8 @@
     <fragment
         android:id="@+id/detalleInmuebleFragment"
         android:name="com.movi.tucasalab3.ui.inmueble.DetalleInmuebleFragment"
-        android:label="fragment_detalle_inmueble"
-        tools:layout="@layout/fragment_detalle_inmueble" >
+        android:label="Detalle del Inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble">
         <action
             android:id="@+id/action_detalleInmuebleFragment_to_nav_inmueble"
             app:destination="@id/nav_inmueble" />
@@ -64,8 +64,8 @@
     <fragment
         android:id="@+id/crearInmuebleFragment"
         android:name="com.movi.tucasalab3.ui.inmueble.CrearInmuebleFragment"
-        android:label="fragment_crear_inmueble"
-        tools:layout="@layout/fragment_crear_inmueble" >
+        android:label="Crear Inmueble"
+        tools:layout="@layout/fragment_crear_inmueble">
         <action
             android:id="@+id/action_crearInmuebleFragment_to_nav_inmueble"
             app:destination="@id/nav_inmueble" />
@@ -73,8 +73,8 @@
     <fragment
         android:id="@+id/nav_inquilino"
         android:name="com.movi.tucasalab3.ui.inquilino.InquilinoFragment"
-        android:label="fragment_inquilino"
-        tools:layout="@layout/fragment_inquilino" >
+        android:label="Buscar Inquilino"
+        tools:layout="@layout/fragment_inquilino">
         <action
             android:id="@+id/action_nav_inquilino_to_detalleInquilinoFragment"
             app:destination="@id/detalleInquilinoFragment" />
@@ -82,8 +82,8 @@
     <fragment
         android:id="@+id/detalleInquilinoFragment"
         android:name="com.movi.tucasalab3.ui.inquilino.DetalleInquilinoFragment"
-        android:label="fragment_detalle_inquilino"
-        tools:layout="@layout/fragment_detalle_inquilino" >
+        android:label="Detalle del Inquilino"
+        tools:layout="@layout/fragment_detalle_inquilino">
         <action
             android:id="@+id/action_detalleInquilinoFragment_to_nav_inquilino"
             app:destination="@id/nav_inquilino" />
@@ -91,8 +91,8 @@
     <fragment
         android:id="@+id/nav_contrato"
         android:name="com.movi.tucasalab3.ui.contrato.ContratoFragment"
-        android:label="fragment_contrato"
-        tools:layout="@layout/fragment_contrato" >
+        android:label="Buscar Contratos "
+        tools:layout="@layout/fragment_contrato">
         <action
             android:id="@+id/action_nav_contrato_to_detalleContratoFragment"
             app:destination="@id/detalleContratoFragment" />
@@ -100,8 +100,8 @@
     <fragment
         android:id="@+id/detalleContratoFragment"
         android:name="com.movi.tucasalab3.ui.contrato.DetalleContratoFragment"
-        android:label="fragment_detalle_contrato"
-        tools:layout="@layout/fragment_detalle_contrato" >
+        android:label="Detalle del Contrato"
+        tools:layout="@layout/fragment_detalle_contrato">
         <action
             android:id="@+id/action_detalleContratoFragment_to_nav_contrato"
             app:destination="@id/nav_contrato" />
@@ -109,8 +109,8 @@
     <fragment
         android:id="@+id/pagosFragment"
         android:name="com.movi.tucasalab3.ui.pago.PagosFragment"
-        android:label="fragment_pagos"
-        tools:layout="@layout/fragment_pagos" >
+        android:label="Lista de Pagos"
+        tools:layout="@layout/fragment_pagos">
         <action
             android:id="@+id/action_pagosFragment_to_nav_contrato"
             app:destination="@id/nav_contrato" />
@@ -119,6 +119,6 @@
     <fragment
         android:id="@+id/nav_salir"
         android:name="com.movi.tucasalab3.ui.salir.SalirFragment"
-        android:label="fragment_salir"
+        android:label="Salir"
         tools:layout="@layout/fragment_salir" />
 </navigation>

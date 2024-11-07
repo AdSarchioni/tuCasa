@@ -47,24 +47,7 @@ public class MainActivity extends AppCompatActivity {
         solicitarPermisos();
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main);
-                NavDestination currentDestination = navController.getCurrentDestination();
 
-                // Verifica si el fragmento actual es InmuebleFragment
-                if (currentDestination != null && currentDestination.getId() == R.id.nav_inmueble) {
-                    // Navega al fragmento crearInmueble
-                    navController.navigate(R.id.crearInmuebleFragment);
-                } else {
-                    // Opción para cuando no estamos en InmuebleFragment
-                    Snackbar.make(view, "No estás en el fragmento Inmueble", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null)
-                            .setAnchorView(R.id.fab).show();
-                }
-            }
-        });
 
 
 

@@ -1,5 +1,7 @@
 package com.movi.tucasalab3.ui.contrato;
 
+
+
 import static com.movi.tucasalab3.retrofit.ApiClient.URLBASEIMG;
 
 import android.content.Context;

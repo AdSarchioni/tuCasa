@@ -104,6 +104,11 @@ public class LoginActivityViewModel extends AndroidViewModel {
 
 
     public void olvidoContrasena(String email) {
+        if (email.isEmpty()) {
+            Toast.makeText(getApplication(), "Por favor, ingrese su correo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ApiClient.InmobiliariaService api=ApiClient.getApiInmobiliaria(context);
         Call<String> llamada= api.olvidoContrasena(email);
         llamada.enqueue(new Callback<String>() {
