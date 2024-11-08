@@ -45,7 +45,7 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.Inqu
         Inmueble inmueble = listaInmuInquilino.get(position);
         holder.tvDireccionInmuInqui.setText(inmueble.getDireccion());
         holder.tvInfoInmuInqui.setText(String.format("%s, %s ambientes, ", inmueble.getUso(), inmueble.getAmbientes()));
-
+        holder.tvOtroI.setText(String.format("Precio: $%s", inmueble.getPrecio()));
         // Cargar imagen (verificar que no sea nulo o vacío)
         if (inmueble.getImagen() != null && !inmueble.getImagen().isEmpty()) {
             try {
@@ -74,13 +74,14 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.Inqu
     }
 
     public class InquilinoViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvDireccionInmuInqui, tvInfoInmuInqui;
+        private TextView tvDireccionInmuInqui, tvInfoInmuInqui, tvOtroI;
         private ImageView ivInmuebleInquilino;
 
         public InquilinoViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDireccionInmuInqui = itemView.findViewById(R.id.tvInmuebleContratoDireccion);
             tvInfoInmuInqui = itemView.findViewById(R.id.tvInmuebleContratoInfo);
+            tvOtroI = itemView.findViewById(R.id.tvOtroI);
             ivInmuebleInquilino = itemView.findViewById(R.id.ivInmuebleContrato);
 
       itemView.setOnClickListener(new View.OnClickListener() {

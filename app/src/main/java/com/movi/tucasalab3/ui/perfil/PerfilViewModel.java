@@ -40,7 +40,10 @@ public class PerfilViewModel extends AndroidViewModel {
             Toast.makeText(context, "El DNI solo debe contener números", Toast.LENGTH_SHORT).show();
             return;  // Terminar la ejecución si el DNI no es válido
         }
-
+if(nombre.isEmpty()||apellido.isEmpty()||direccion.isEmpty()||telefono.isEmpty()){
+    Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+    return;
+}
 
 
         // Crear el objeto propietario con los datos proporcionados

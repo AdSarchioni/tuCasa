@@ -47,7 +47,7 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
         Inmueble inmueble = listaInmuebleContrato.get(position);
         holder.tvInmuebleContratoDireccion.setText(inmueble.getDireccion());
         holder.tvInmuebleContratoInfo.setText(String.format("%s, %s ambientes, ", inmueble.getUso(), inmueble.getAmbientes()));
-
+        holder.tvOtroC.setText(String.format("Precio: $%s", inmueble.getPrecio()));
         // Cargar imagen (verificar que no sea nulo o vacío)
         if (inmueble.getImagen() != null && !inmueble.getImagen().isEmpty()) {
             try {
@@ -77,13 +77,15 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
 
     public class ContratoViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvInmuebleContratoDireccion, tvInmuebleContratoInfo;
+        private TextView tvInmuebleContratoDireccion, tvInmuebleContratoInfo,tvOtroC;
         private ImageView ivInmuebleContrato;
+
 
         public ContratoViewHolder(@NonNull View itemView) {
             super(itemView);
             tvInmuebleContratoDireccion = itemView.findViewById(R.id.tvInmuebleContratoDireccion);
             tvInmuebleContratoInfo = itemView.findViewById(R.id.tvInmuebleContratoInfo);
+            tvOtroC=itemView.findViewById(R.id.tvOtroC);
             ivInmuebleContrato = itemView.findViewById(R.id.ivInmuebleContrato);
 
             itemView.setOnClickListener(new View.OnClickListener() {

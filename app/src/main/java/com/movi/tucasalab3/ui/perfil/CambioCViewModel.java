@@ -24,6 +24,12 @@ public class CambioCViewModel extends AndroidViewModel {
         context = application.getApplicationContext();
     }
     public void cambiarContrasena(String contrasenaActual, String contrasenaNueva) {
+        if(contrasenaActual.isEmpty()||contrasenaNueva.isEmpty()){
+            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         ApiClient.InmobiliariaService api = ApiClient.getApiInmobiliaria(context);
         String token = ApiClient.obtenerToken(context);
 
