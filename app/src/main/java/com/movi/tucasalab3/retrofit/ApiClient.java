@@ -88,8 +88,8 @@ public class ApiClient {
     }
 
 
-    public static final String URLBASE = "http://192.168.1.104:5028/api/";
-    public static final String URLBASEIMG = "http://192.168.1.104:5028/img/";
+    public static final String URLBASE = "http://192.168.1.102:5028/api/";
+    public static final String URLBASEIMG = "http://192.168.1.102:5028/img/";
     public static InmobiliariaService getApiInmobiliaria(Context context){
 
 

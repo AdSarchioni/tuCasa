@@ -44,7 +44,7 @@ public class CrearInmuebleFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(CrearInmuebleViewModel.class);
 
         // Inicialización del Spinner
-        String[] tiposInmueble = {"Casa", "Departamento", "Local"};
+        String[] tiposInmueble = {"Casa","Apartamento","Oficina","Local Comercial", "Departamento", "Estudio","Duplex","Chalet","Cabaña"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, tiposInmueble);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -48,7 +48,8 @@
         android:id="@+id/etAmbientes"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:hint="Ambientes:"
+        android:hint="Cant.Ambientes:"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etUso" />
@@ -58,7 +59,8 @@
         android:id="@+id/etBano"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:hint="Baño: "
+        android:hint="Cant.Baños: "
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etAmbientes" />
@@ -99,7 +101,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:hint="Precio: "
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etServicios" />
@@ -110,6 +112,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:hint="Superficie: "
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPrecio" />

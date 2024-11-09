@@ -28,46 +28,31 @@ public class HomeViewModel extends AndroidViewModel {
     private MutableLiveData<MapaActual> mMapaActual;
     private FusedLocationProviderClient fused;
 
-
-
     public HomeViewModel(@NonNull Application application) {
         super(application);
         fused = LocationServices.getFusedLocationProviderClient(application);
         context = application.getApplicationContext();
     }
+
     public LiveData<MapaActual> getMmapaActual() {
         if (mMapaActual == null) mMapaActual = new MutableLiveData<>();
         return mMapaActual;
     }
+
     public void obtenerMapa() {
         mMapaActual.setValue(new MapaActual());
     }
+
     public class MapaActual implements OnMapReadyCallback {
         LatLng INMOBILIARIA = new LatLng(-33.280576, -66.332482);
-
 
         @Override
         public void onMapReady(@NonNull GoogleMap googleMap) {
             googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
             googleMap.addMarker(new MarkerOptions().position(INMOBILIARIA).title("INMOBILIARIA").snippet("La mejor"));
 
-
-//
-
-//            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//
-//                return;
-//            }
-//            fused.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-//                @Override
-//                public void onSuccess(Location location) {
-//                    if (location != null) {
-//                        LatLng yo = new LatLng(location.getLatitude(), location.getLongitude());
-//                        googleMap.addMarker(new MarkerOptions().position(yo).title("Yo"));
-//                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yo, 15));
-//                    }
-//                }
-//            });
+            float zoomLevel = 14.0f; // Ajusta el nivel de zoom según sea necesario
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(INMOBILIARIA, zoomLevel));
         }
     }
 }

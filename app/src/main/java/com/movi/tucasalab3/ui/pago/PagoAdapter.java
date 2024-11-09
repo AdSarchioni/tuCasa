@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.movi.tucasalab3.R;
-import com.movi.tucasalab3.models.Inmueble;
 import com.movi.tucasalab3.models.Pago;
 
 import java.time.LocalDate;
@@ -39,14 +38,15 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PagoAdapter.PagoViewHolder holder, int position) {
-Pago pago = listaPagos.get(position);
+        Pago pago = listaPagos.get(position);
         holder.tvCodigoPago.setText(String.valueOf(pago.getId_Pago()));
         holder.tvImportePago.setText(String .valueOf(pago.getImporte()));
+        holder.tvNContrato.setText(String .valueOf(pago.getContrato().getId_Contrato()));
         LocalDate fechaPago = LocalDate.parse(listaPagos.get(position).getFecha(), DateTimeFormatter.ISO_DATE_TIME);
         String SfechaPago = fechaPago.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         holder.tvFechaPago.setText(SfechaPago);
 
-        // holder.tvFechaPago.setText(String .valueOf(pago.getFecha()));
+
         holder.tvNroPago.setText(String .valueOf(pago.getCuotaPaga()));
     }
 
@@ -60,6 +60,7 @@ Pago pago = listaPagos.get(position);
            private TextView tvImportePago;
            private TextView tvFechaPago;
            private TextView tvNroPago;
+           private TextView tvNContrato;
 
         public PagoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,8 +68,9 @@ Pago pago = listaPagos.get(position);
             tvImportePago = itemView.findViewById(R.id.TVInportePago);
             tvFechaPago = itemView.findViewById(R.id.TVFechaPago);
             tvNroPago = itemView.findViewById(R.id.TVNroPago);
-        }
+            tvNContrato = itemView.findViewById(R.id.tvNContrato);
     }
+}
 }
 
 

@@ -139,8 +139,7 @@ public class LoginActivityViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 Toast.makeText(getApplication(), "Se envio a su Correo la nueva contraseña ", Toast.LENGTH_SHORT).show();
-                // Log.d("salida", "regreso: " + response.code());
-                //Log.d("salida", "regreso: " + response.toString());
+
             }
 
             @Override

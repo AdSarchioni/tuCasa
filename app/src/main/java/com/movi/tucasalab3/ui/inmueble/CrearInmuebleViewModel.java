@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import okhttp3.MediaType;
@@ -96,106 +98,109 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
         // Retorna la ruta real del archivo o `null` si no se encontró
         return result;
     }
-
     public void cargarInmueble(View view, String direccion, String uso, String ambientes, String bano, String condicion,
                                String descripcion, String servicios, String precio, String superficie, String tipo,
                                boolean patio, boolean cochera, boolean estado) {
-
-        // Convierte el tipo de inmueble a un entero según la opción seleccionada
-        int tipoInt;
-        switch (tipo) {
-            case "Casa":
-                tipoInt = 1;
-                break;
-            case "Departamento":
-                tipoInt = 2;
-                break;
-            case "Local":
-                tipoInt = 3;
-                break;
-            default:
-                tipoInt = 0; // Usamos 0 como valor por defecto si el tipo no es reconocido
-                break;
+        if (direccion.isEmpty() || uso.isEmpty() || ambientes.isEmpty() || bano.isEmpty() || condicion.isEmpty() ||
+                descripcion.isEmpty() || servicios.isEmpty() || precio.isEmpty() || superficie.isEmpty() || tipo.isEmpty()) {
+            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        // Conversión de ambientes, tamano (superficie), y precio a sus tipos respectivos
+        // Conversión del tipo de inmueble a entero
+        int tipoInt;
+        switch (tipo) {
+            case "Apartamento": tipoInt = 1; break;
+            case "Casa": tipoInt = 2; break;
+            case "Oficina": tipoInt = 3; break;
+            case "Local Comercial": tipoInt = 4; break;
+            case "Estudio": tipoInt = 5; break;
+            case "Duplex": tipoInt = 6; break;
+            case "Cabaña": tipoInt = 7; break;
+            case "Chalet": tipoInt = 8; break;
+            case "Penthouse": tipoInt = 9; break;
+            case "Garaje": tipoInt = 10; break;
+            default: tipoInt = 0; break;
+        }
+
         int ambientesInt = Integer.parseInt(ambientes);
         double tamanoDouble = Double.parseDouble(superficie);
         double precioDouble = Double.parseDouble(precio);
 
         String imagePath = getRealPathFromURI();
+        MultipartBody.Part imagen = null;
 
         if (imagePath != null) {
-
-           // imagePath = imagePath.toLowerCase(); // Convierte la ruta a minúsculas
             File file = new File(imagePath);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
-            MultipartBody.Part imagen = MultipartBody.Part.createFormData("imagen", file.getName(), requestFile);
+            imagen = MultipartBody.Part.createFormData("imagen", file.getName(), requestFile);
+        } else {
+            // Cargar una imagen predeterminada de drawable
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tucasa); // Reemplaza "default_image" con el ID de tu imagen en drawable
+            File file = new File(context.getCacheDir(), "default_image.jpg");
 
-            RequestBody Direccion = RequestBody.create(MediaType.parse("application/json"), direccion);
-            RequestBody Uso = RequestBody.create(MediaType.parse("application/json"), uso);
-            RequestBody Ambientes = RequestBody.create(MediaType.parse("application/json"), String.valueOf(ambientesInt));
-            RequestBody Bano = RequestBody.create(MediaType.parse("application/json"), bano);
-            RequestBody Condicion = RequestBody.create(MediaType.parse("application/json"), condicion);
-            RequestBody Servicios = RequestBody.create(MediaType.parse("application/json"), servicios);
-            RequestBody Tamano = RequestBody.create(MediaType.parse("application/json"), String.valueOf(tamanoDouble));
-            RequestBody Descripcion = RequestBody.create(MediaType.parse("application/json"), descripcion);
-            RequestBody Patio = RequestBody.create(MediaType.parse("application/json"), String.valueOf(patio ? 1 : 0));
-            RequestBody Cochera = RequestBody.create(MediaType.parse("application/json"), String.valueOf(cochera ? 1 : 0));
-            RequestBody Estado_Inmueble = RequestBody.create(MediaType.parse("application/json"), String.valueOf(estado ? 1 : 0));
-            RequestBody id_Tipo_Inmueble = RequestBody.create(MediaType.parse("application/json"), String.valueOf(tipoInt));
-            RequestBody Precio = RequestBody.create(MediaType.parse("application/json"), String.valueOf(precioDouble));
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
+                imagen = MultipartBody.Part.createFormData("imagen", file.getName(), requestFile);
+            } catch (IOException e) {
+                Toast.makeText(context, "Error al cargar la imagen predeterminada", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
-            // Llama a tu servicio API para crear el inmueble, pasando estos RequestBody como parámetros.
+        // Preparación de los RequestBody
+        RequestBody Direccion = RequestBody.create(MediaType.parse("application/json"), direccion);
+        RequestBody Uso = RequestBody.create(MediaType.parse("application/json"), uso);
+        RequestBody Ambientes = RequestBody.create(MediaType.parse("application/json"), String.valueOf(ambientesInt));
+        RequestBody Bano = RequestBody.create(MediaType.parse("application/json"), bano);
+        RequestBody Condicion = RequestBody.create(MediaType.parse("application/json"), condicion);
+        RequestBody Servicios = RequestBody.create(MediaType.parse("application/json"), servicios);
+        RequestBody Tamano = RequestBody.create(MediaType.parse("application/json"), String.valueOf(tamanoDouble));
+        RequestBody Descripcion = RequestBody.create(MediaType.parse("application/json"), descripcion);
+        RequestBody Patio = RequestBody.create(MediaType.parse("application/json"), String.valueOf(patio ? 1 : 0));
+        RequestBody Cochera = RequestBody.create(MediaType.parse("application/json"), String.valueOf(cochera ? 1 : 0));
+        RequestBody Estado_Inmueble = RequestBody.create(MediaType.parse("application/json"), String.valueOf(estado ? 1 : 0));
+        RequestBody id_Tipo_Inmueble = RequestBody.create(MediaType.parse("application/json"), String.valueOf(tipoInt));
+        RequestBody Precio = RequestBody.create(MediaType.parse("application/json"), String.valueOf(precioDouble));
 
-             String token = ApiClient.obtenerToken(context);
+        String token = ApiClient.obtenerToken(context);
+        ApiClient.InmobiliariaService api = ApiClient.getApiInmobiliaria(context);
+        Call<Inmueble> llamada = api.crearInmueble(token, Direccion, Uso, Bano, Condicion, Descripcion, Servicios, Tamano,
+                Patio, Cochera, id_Tipo_Inmueble, Ambientes, Precio, Estado_Inmueble, imagen);
 
-            ApiClient.InmobiliariaService api = ApiClient.getApiInmobiliaria(context);
-            Call<Inmueble> llamada = api.crearInmueble(token, Direccion, Uso, Bano, Condicion, Descripcion, Servicios, Tamano,
-                    Patio, Cochera, id_Tipo_Inmueble, Ambientes, Precio, Estado_Inmueble, imagen);
-
-            llamada.enqueue(new Callback<Inmueble>() {
-                @Override
-                public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
-                    if (response.isSuccessful()) {
-
-                        Toast.makeText(context, "Inmueble Agregado", Toast.LENGTH_LONG).show();
-                        Navigation.findNavController(view).navigate(R.id.nav_inmueble);
-
-                    } else {
-
-                        try {
-                            String errorResponse = response.errorBody().string();
-                            String errorMessage = "";
-
-                            try {
-                                JSONObject jsonObject = new JSONObject(errorResponse);
-                                if (jsonObject.has("errors")) {
-
-                                    Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                // Si no se pudo analizar como JSON, el mensaje de error es la respuesta tal cual
-                                errorMessage = errorResponse;
-                            }
-
-                            Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+        llamada.enqueue(new Callback<Inmueble>() {
+            @Override
+            public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Inmueble Agregado", Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(view).navigate(R.id.nav_inmueble);
+                } else {
+                    try {
+                        String errorResponse = response.errorBody().string();
+                        JSONObject jsonObject = new JSONObject(errorResponse);
+                        if (jsonObject.has("errors")) {
+                            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, errorResponse, Toast.LENGTH_LONG).show();
                         }
+                    } catch (IOException | JSONException e) {
+                        Toast.makeText(context, "Error al procesar la respuesta", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
 
-                public void onFailure(Call<Inmueble> call, Throwable t) {
-                    Log.d("salida falla ",t.getMessage());
-                }
+            @Override
+            public void onFailure(Call<Inmueble> call, Throwable t) {
+                Log.d("salida falla ", t.getMessage());
+            }
+        });
+    }
 
-            });
 
 
-        }else{
-            Toast.makeText(context, "La imagen es obligatoria", Toast.LENGTH_SHORT).show();
-        }
+
+
 
 
 
@@ -209,7 +214,7 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
 
 
 
-}
+
 
 
 
