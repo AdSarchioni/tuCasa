@@ -173,7 +173,7 @@ public void HacerLlamada(SensorEvent sensor) {
             // Verifica si la velocidad excede el umbral de agitación.
             if (speed > SHAKE_THRESHOLD) {
                 // Número de teléfono a llamar cuando se detecta la agitación.
-                String TelefonoI = "2665104886";
+                String TelefonoI = "2664834068";
 
                 // Crea un Intent para realizar una llamada.
                 Intent intent = new Intent(Intent.ACTION_CALL);
